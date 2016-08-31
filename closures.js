@@ -80,17 +80,24 @@ var makeCounter = function(count){
 // You will need to use the module pattern to achieve this.
 
 function counterFactory(value) {
-
-  // Code here.
-
+  var inc = function(){
+    value++;
+    return value;
+  }
+  var dec = function(){
+    value--;
+    return value;
+  }
 
   return {
+    inc: inc,
+    dec: dec
   }
 }
 
 
 counter = counterFactory(10);
-
+counter.inc();
 
 
 
