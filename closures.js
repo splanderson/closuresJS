@@ -79,26 +79,40 @@ var makeCounter = function(count){
 // The second function is called dec, this function is responsible for decrementing the value by one
 // You will need to use the module pattern to achieve this.
 
-function counterFactory(value) {
-  var inc = function(){
-    value++;
-    return value;
-  }
-  var dec = function(){
-    value--;
-    return value;
-  }
+// function counterFactory(value) {
+//   var inc = function(){
+//     value++;
+//     return value;
+//   }
+//   var dec = function(){
+//     value--;
+//     return value;
+//   }
+//
+//   return {
+//     inc: inc,
+//     dec: dec
+//   }
+// }
+//
+//
+// counter = counterFactory(10);
+// counter.inc();
 
-  return {
-    inc: inc,
-    dec: dec
-  }
-}
 
+var counterFactory = function(value) {
+  var counting = {
+    inc: function(){
+      return ++value;
+    },
+    dec: function(){
+      return --value;
+    }
+  };
+  return counting;
+};
 
 counter = counterFactory(10);
-counter.inc();
-
 
 
 //////////////////PROBLEM 5////////////////////
@@ -110,12 +124,13 @@ counter.inc();
 
     var welcomeText = 'You\'re doing awesome, keep it up ';
 
-    // code message function here.
-
+    function message(){
+       return welcomeText + firstname + " " + lastname + ".";
+    }
 
     //Uncommment this to return the value of your invoked message function
 
-    //return message()
+    return message();
   }
 
   motivation('Billy', 'Bob'); // 'Your doing awesome keep it up Billy Bob
@@ -141,13 +156,15 @@ counter.inc();
     // Anything that is being returned is made public and can be invoked from outside our lexical scope
 
     return {
-      // Code here.
+      publicMethod: function() {
+      return privateMethod();
+      }
     };
 
   })();
 
 //Uncomment this after you create your public method
-//   module.publicMethod();
+  module.publicMethod();
 
 
 
