@@ -175,14 +175,14 @@ counter = counterFactory(10);
 
 function timeOutCounter() {
   for (var i = 0; i <= 5; i++) {
-    newScope(i, i)
+    setTimeout(newScope(i), i * 1000);
     }
   }
 
   function newScope(i) {
-    setTimeout(function() {
+    return function() {
     console.log(i)
-  }, i * 1000)
+  }
 }
 timeOutCounter();
   // To make this code work you will need to create a new scope for every iteration.
