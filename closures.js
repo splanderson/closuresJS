@@ -175,14 +175,14 @@ counter = counterFactory(10);
 
 function timeOutCounter() {
   for (var i = 0; i <= 5; i++) {
-    setTimeout(function() {
-      console.log(i);
-    }, i * 1000)
+    newScope(i, i)
+    }
   }
 
   function newScope(i) {
+    setTimeout(function() {
     console.log(i)
-  }
+  }, i * 1000)
 }
 timeOutCounter();
   // To make this code work you will need to create a new scope for every iteration.
@@ -193,17 +193,38 @@ timeOutCounter();
 
 //////////////////PROBLEM 8////////////////////
 
-var funcArray = [];
+var value = [0,1,2,3,4,5];
+
+function makeClosure(num) {
+  return function() {
+    return num;
+  }
+}
+
+function makeFuncArray(value) {
+  var functions = [];
+
+  for(var i = 0; i < value.length; i++) {
+    var func = makeClosure(value[i]);
+
+    functions.push(func);
+  }
+
+  return functions;
+}
+
+var funcArray = makeFuncArray(value);
+
+funcArray[0](); //0
+funcArray[1](); //1
+funcArray[2](); //2
+funcArray[3](); //3
+funcArray[4](); //4
+funcArray[5](); //5
 
 /*
   Make the following code work
 
-  funcArray[0]() //0
-  funcArray[1]() //1
-  funcArray[2]() //2
-  funcArray[3]() //3
-  funcArray[4]() //4
-  funcArray[5]() //5
 
   *Hint: Don't let this fool you. Break down what's really happening here.
 */
